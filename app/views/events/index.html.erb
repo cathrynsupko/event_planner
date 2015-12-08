@@ -1,1 +1,19 @@
-<h1>hello</h1>
+<div class="large-container">
+  <% @events.each do |event| %>
+    <div class="event">
+      <div class="date">
+        <div class="day">
+          <%= event.date.day %>
+        </div>
+        <%= event.date.strftime("%B").upcase %>
+      </div>
+      <div class="info">
+        <%= link_to event.title, event_path(event) %><br>
+        <span class="small light">
+          hosted by <%= event.user.name %> <br>
+        </span>
+      <div>
+    </div>
+  <% end %>
+  
+</div>

@@ -1,0 +1,16 @@
+<div class="main">
+  <h1> <%= @event.title %> </h1>
+  Location: <span class="light"><%= @event.location %></span><br>
+  Start Time: <span class="light"><%= @event.start.hour %></span>
+ 
+  <h3>Description</h3>
+  <p>
+    <%= @event.description %>
+    
+  </p>
+</div>
+
+<div class="main">
+  Are you going? 
+  <h3>Attendees (<%= @event.attendees.count%>)</h3>
+</div>
