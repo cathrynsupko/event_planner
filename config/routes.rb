@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show]
   
+  resources :comments, only: [:create, :update, :destroy]
+  
   resources :events
   
   resources :attendings, only: [:create, :update]
