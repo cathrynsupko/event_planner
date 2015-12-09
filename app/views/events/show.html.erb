@@ -24,8 +24,36 @@
 </div>
 
 <div class="main">
-  Are you going?
-  <!-- TODO add attending buttons -->
-  <h3>Attendees (<%= @event.attendees.count%>)</h3>
+<% if @attending %>
+  Your RSVP: 
+  <%= link_to "yes", 
+    { controller: "attendings", action: "update", event: @event.id, rsvp: true }, 
+    method: :patch %><br>
+  Change to
+    <%= link_to "no", 
+    { controller: "attendings", action: "update", event: @event.id, rsvp: false }, 
+    method: :patch %>
+
+
+<% else %>
+ Are you going?
+  <%= link_to "yes", 
+    { controller: "attendings", action: "create", event: @event.id, rsvp: true }, 
+    method: :post, remote: true %>
+   
+   <%= link_to "no", 
+      { controller: "attendings", action: "create", event: @event.id, rsvp: false },
+        method: :post, remote: true %>
+<% end %>      
+        
+        
+        
+        
+  <h3>Attendees (<span id="attend-<%=@event.id %>"><%= @event.attendees.count%></span>)</h3>
+  <% @event.attendees.each do |user| %>
+    <p><%=  user.name %> </p>
+  <% end %>
+  
+  
 </div>
 
