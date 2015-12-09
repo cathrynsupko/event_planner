@@ -1,7 +1,20 @@
 <div class="main">
+  <!-- TODO add icons to details -->
   <h1> <%= @event.title %> </h1>
-  Location: <span class="light"><%= @event.location %></span><br>
-  Start Time: <span class="light"><%= @event.start.hour %></span>
+  <% if current_user == @event.user %>
+    <span class="light">
+      <%= link_to "Edit Event", edit_event_path(@event) %> |
+      <%= link_to "Delete Event", event_path(@event), method: :delete %>
+    </span><br>
+  <% end %>
+   <span>
+   <%= @event.date.strftime("%A, %B %e")%>
+   <% if @event.start %>
+    , at <%= @event.start.strftime("%I:%M %p") %>
+   <% end %>
+     </span><br>
+  <span><%= @event.location %></span><br>
+ 
  
   <h3>Description</h3>
   <p>
@@ -11,6 +24,8 @@
 </div>
 
 <div class="main">
-  Are you going? 
+  Are you going?
+  <!-- TODO add attending buttons -->
   <h3>Attendees (<%= @event.attendees.count%>)</h3>
 </div>
+

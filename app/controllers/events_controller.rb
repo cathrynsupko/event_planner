@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy]
   
   def index
     @events = Event.all
@@ -22,9 +22,35 @@ class EventsController < ApplicationController
     @event = Event.find_by(id: params[:id])
   end
   
+  def edit
+    @event = Event.find_by(id: params[:id])
+    authorize_user(@event)
+  end
+  
+  def update
+    @event = Event.find_by(id:params[:id])
+    authorize_user(@event)
+    @event.update_attributes(event_params)
+    if @event.save
+      redirect_to @event
+    else
+      render 'edit'
+    end
+  end
+  
+  def destroy
+    Event.find_by(id: params[:id]).destroy
+    redirect_to events_path
+  end
+  
+  
   private
   
     def event_params
       params.require(:event).permit(:title, :date, :start, :end, :location, :description)
+    end
+    
+    def authorize_user(event)
+      redirect_to events_path unless current_user == event.user
     end
 end

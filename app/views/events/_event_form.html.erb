@@ -1,0 +1,34 @@
+<%= form_for event do |f| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h3>Sorry! There was a problem saving your event!</h3>
+      <ul>
+        <% event.errors.messages.each do |attr, errors| %>
+          <% errors.each do |error| %>
+            <li> <%= attr %> <%= error %> </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+      
+  <%= f.label "Event title" %>
+  <%= f.text_field :title %>
+      
+  <%= f.label "Date" %>
+  <%= f.date_field :date%>
+      
+  <%= f.label "Start time" %>
+  <%= f.time_field :start %>
+      
+  <%= f.label "End time" %>
+  <%= f.time_field :end %>
+      
+  <%= f.label "Location" %>
+  <%= f.text_field :location %>
+      
+  <%= f.label "Description" %>
+  <%= f.text_area :description %>
+      
+  <%= f.submit "Submit" %>
+<% end %>
