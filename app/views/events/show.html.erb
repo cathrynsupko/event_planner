@@ -1,5 +1,5 @@
 <div class="main">
-  <!-- TODO add icons to details -->
+  
   <h1> <%= @event.title %> </h1>
   <% if current_user == @event.user %>
     <span class="light">
@@ -7,17 +7,23 @@
       <%= link_to "Delete Event", event_path(@event), method: :delete %>
     </span><br>
   <% end %>
-   <span>
-   <%= @event.date.strftime("%A, %B %e")%>
-   <% if @event.start %>
-    , at <%= @event.start.strftime("%I:%M %p") %>
-   <% end %>
-     </span><br>
-  <span><%= @event.location %></span><br>
+  
+  <div class="info">
+    <i class="material-icons">event</i>
+     <span>
+     <%= @event.date.strftime("%A, %B %e")%>
+     <% if @event.start %>
+      , at <%= @event.start.strftime("%I:%M %p") %>
+     <% end %>
+       </span><br>
+       
+    <i class="material-icons">place</i>
+    <span><%= @event.location %></span><br>
+  </div>    
  
  
   <h3>Description</h3>
-  <p>
+  <p class="light">
     <%= @event.description %>
     
   </p>
@@ -58,13 +64,13 @@
 </div>
 
 
-<div class="main">
+<div class="main comments">
   <h2> Comments </h2>
   
   <%= form_for @comment, url: comments_path, remote: true do |f| %>
     <%= f.text_area :content %><br>
     <%= f.hidden_field :event_id, value: @event.id %>
-    <%= f.submit %>
+    <%= f.submit "Post" %>
   <% end %>
   <div id="comments-<%= @event.id %>">
     <% @event.comments.order('created_at DESC').each do |comment| %>
