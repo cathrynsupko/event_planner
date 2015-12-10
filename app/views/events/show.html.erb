@@ -30,33 +30,41 @@
 </div>
 
 <div class="main">
-<% if @attending %>
+<% if @responded %>
+  <% rsvp = @going ? "Yes" : "No" %>
+  <% other = @going ? "No" : "Yes" %>
   Your RSVP: 
-  <%= link_to "yes", 
-    { controller: "attendings", action: "update", event: @event.id, rsvp: true }, 
-    method: :patch %><br>
+  <button class="active">
+    <%= link_to rsvp, 
+      { controller: "attendings", action: "update", event: @event.id, rsvp: @going }, 
+      method: :patch %>
+  </button>
   Change to
-    <%= link_to "no", 
-    { controller: "attendings", action: "update", event: @event.id, rsvp: false }, 
+  <button>
+    <%= link_to other, 
+    { controller: "attendings", action: "update", event: @event.id, rsvp: !@going }, 
     method: :patch %>
-
+  </button>
 
 <% else %>
  Are you going?
-  <%= link_to "yes", 
-    { controller: "attendings", action: "create", event: @event.id, rsvp: true }, 
-    method: :post, remote: true %>
-   
-   <%= link_to "no", 
+  <button>
+    <%= link_to "Yes", { controller: "attendings", action: "create", event: @event.id, rsvp: true }, 
+      method: :post, remote: true %>
+  </button>
+    
+  <button>
+    <%= link_to "No", 
       { controller: "attendings", action: "create", event: @event.id, rsvp: false },
         method: :post, remote: true %>
+  </button>
 <% end %>      
         
         
         
         
-  <h3>Attendees (<span id="attend-<%=@event.id %>"><%= @event.attendees.count%></span>)</h3>
-  <% @event.attendees.each do |user| %>
+  <h3>Attendees (<span id="attend-<%=@event.id %>"><%= @attendees.count%></span>)</h3>
+  <% @attendees.each do |user| %>
     <p><%=  user.name %> </p>
   <% end %>
   

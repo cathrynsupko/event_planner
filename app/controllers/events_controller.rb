@@ -21,8 +21,9 @@ class EventsController < ApplicationController
   def show
     @event = Event.find_by(id: params[:id])
     @comment = Comment.new
-    @attending = current_user ? @event.attendees.find_by(id: current_user.id) : nil
-   
+    @responded = user_responded?(@event)
+    @going = user_going?(@event)
+    @attendees = event_attendees(@event)
   end
   
   def edit
@@ -56,4 +57,11 @@ class EventsController < ApplicationController
     def authorize_user(event)
       redirect_to events_path unless current_user == event.user
     end
+    
+    def event_attendees(event)
+      yeses = Attending.where("attended_event_id = ? AND going = ?", event.id, true)
+      ids = yeses.map { |yes| yes.attendee_id }
+      attendees = User.where(id: ids)
+    end
+    
 end

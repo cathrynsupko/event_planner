@@ -20,7 +20,7 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find_by(id: params[:id])
-     
+    @comment = Comment.new
     @attending = current_user ? @event.attendees.find_by(id: current_user.id) : nil
    
   end
