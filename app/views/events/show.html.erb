@@ -73,7 +73,7 @@
   <% end %>
   
   <h3> Invited </h3>
-  <%= link_to "invite others", new_invitation_path( id: @event.id )%><br>
+  <%= link_to "invite others", new_event_invitation_path(@event)%><br>
   <% @invitees.each do |invitee| %>
     <%= link_to invitee.name, user_path(invitee) %>
   <% end %>

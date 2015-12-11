@@ -3,7 +3,6 @@ class EventsController < ApplicationController
   
   def index
     @upcoming = Event.where("date >= ?", Time.now).order("date")
-    
     @past = Event.where("date < ?", Time.now).order("date")
   end
   
@@ -26,6 +25,7 @@ class EventsController < ApplicationController
     @responded = user_responded?(@event)
     @going = user_going?(@event)
     @attendees = event_attendees(@event)
+    @invitees = invitees(@event)
   end
   
   def edit

@@ -36,11 +36,11 @@ nav{
 
 a{
   text-decoration:none;
-  color:#9C27B0;
+  color:#673AB7;
 }
 
 a:hover{
-  color: #1DE9B6;
+  color: #9575CD;
 }
 
 input{

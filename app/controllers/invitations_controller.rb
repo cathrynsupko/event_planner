@@ -1,13 +1,9 @@
 class InvitationsController < ApplicationController
-  def new
-    @event = Event.find(params[:id])
-    @invitation = Invitation.new
-  end
+  before_action :authenticate_user!
   
-  def index
+  def new
     @event = Event.find(params[:event_id])
-    @ids = params[:values][:user_ids]
-    @stuff = User.where(id: @ids)
+    @invitation = Invitation.new
   end
   
   def create

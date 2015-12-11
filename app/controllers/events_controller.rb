@@ -13,6 +13,12 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build(event_params)
     if @event.save
+      #have the host invite themselves so they can access
+      #the event if it is private
+      invitation = @event.invitations.build
+      invitation.inviter_id = current_user.id
+      invitation.invitee_id = current_user.id
+      invitation.save
       redirect_to events_path
     else
       render 'new'
@@ -21,6 +27,7 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find_by(id: params[:id])
+    permitted_user(@event) if @event.private
     @comment = Comment.new
     @responded = user_responded?(@event)
     @going = user_going?(@event)
@@ -53,7 +60,7 @@ class EventsController < ApplicationController
   private
   
     def event_params
-      params.require(:event).permit(:title, :date, :start, :end, :location, :description)
+      params.require(:event).permit(:title, :date, :start, :end, :location, :description, :private)
     end
     
     def authorize_user(event)
@@ -66,4 +73,21 @@ class EventsController < ApplicationController
       attendees = User.where(id: ids)
     end
     
+    def user_invited?(event)
+      return false unless current_user
+      invitees(event).include?(current_user)
+    end
+    
+    def user_attending?(event)
+      return false unless current_user
+      event.attendees.include?(current_user)
+    end
+    
+    def permitted_user(event)
+      
+      unless user_invited?(event) || user_attending?(event)
+        flash[:notice] = "Sorry! The event you are trying to access is private."
+        redirect_to events_path
+      end
+    end
 end
