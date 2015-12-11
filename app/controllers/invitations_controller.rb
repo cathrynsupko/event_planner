@@ -3,7 +3,7 @@ class InvitationsController < ApplicationController
   
   def new
     @event = Event.find(params[:event_id])
-    @invitation = Invitation.new
+    @users = not_invited(@event)
   end
   
   def create
@@ -18,4 +18,6 @@ class InvitationsController < ApplicationController
     end
     redirect_to @event
   end
+  
+  
 end

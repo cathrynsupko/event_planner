@@ -1,0 +1,17 @@
+<div class="event">
+    
+  <div class="date">
+    <div class="day">
+      <%= event.date.day %>
+    </div>
+    <%= event.date.strftime("%B").upcase %>
+  </div>
+      
+  <div class="details">
+    <%= link_to event.title, event_path(event) %><br>
+    <span class="small light">
+      hosted by <%= link_to event.user.name, user_path(event.user) %> <br>
+    </span>
+  </div> 
+    
+</div>

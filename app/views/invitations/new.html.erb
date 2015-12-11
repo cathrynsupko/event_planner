@@ -1,8 +1,13 @@
-<h1>Invite people to <%= @event.title%></h1>
-
-<%= form_tag(event_invitations_path(@event), method: :post) do %>
-  <%= collection_check_boxes(:values, :user_ids, User.all, :id, :name) %>
-  <%= hidden_field_tag(:event_id, @event.id) %>
-  <%= submit_tag("submit") %>
-<% end %>
-
+<div class="main">
+  <% if @users.any? %>
+    <h2>Invite people to <%= @event.title%></h2>
+    
+    <%= form_tag(event_invitations_path(@event), method: :post) do %>
+      <%= collection_check_boxes(:values, :user_ids, @users, :id, :name) %><br>
+      <%= hidden_field_tag(:event_id, @event.id) %>
+      <%= submit_tag("submit") %>
+    <% end %>
+  <% else %>
+    <h2>Everyone is already going!</h2>
+  <% end %>
+</div>

@@ -63,20 +63,24 @@
   
 <% end %>
         
-        
-  <h3>Attending (<span id="attend-<%=@event.id %>"><%= @attendees.count%></span>)</h3>
-  
-  <% @attendees.each do |user| %>
-    <div class="user-display">
-      <%= link_to user.name, user_path(user) %>
-    </div>
-  <% end %>
-  
-  <h3> Invited </h3>
-  <%= link_to "invite others", new_event_invitation_path(@event)%><br>
-  <% @invitees.each do |invitee| %>
-    <%= link_to invitee.name, user_path(invitee) %>
-  <% end %>
+  <div class="display">    
+    <h3>Attending (<span id="attend-<%=@event.id %>"><%= @attendees.count%></span>)</h3>
+    
+    <% @attendees.each do |user| %>
+      <div class="user-display">
+        <%= link_to user.name, user_path(user) %>
+      </div>
+    <% end %>
+  </div>
+  <div class="display">
+    <h3> Invited (<span id="attend-<%=@event.id %>"><%= @invitees.count%></span>) </h3>
+    <%= link_to "invite others", new_event_invitation_path(@event)%><br>
+    <% @invitees.each do |invitee| %>
+      <div class="user-display">
+        <%= link_to invitee.name, user_path(invitee) %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 

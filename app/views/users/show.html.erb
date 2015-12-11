@@ -1,1 +1,29 @@
-<h1> <%= @user.name %> </h1>
+<div class="large-container">
+
+  <h1> <%= @user.name %> </h1>
+  <h3> Member for <%= time_ago_in_words @user.created_at %> 
+</div>
+<% if @user == current_user %>
+  <div class="large-container">
+  <h2> Your invitations</h2>
+    <% @invites.each do |event| %>
+      <%= render partial: 'events/event', locals: { event: event } %>
+    <% end %>
+  </div>
+<% end %>
+<div class="large-container">
+  <h2>Events hosted by <%= @user.name %></h2>
+  
+  <% @user.events.each do |event| %>
+    <%= render partial: 'events/event', locals: { event: event } %>
+  <% end %>
+
+</div>
+
+
+<div class="large-container">
+  <h2>Upcoming events <%= @user.name %> is attending</h2>
+  <% @user.attended_events.each do |event| %>
+    <%= render partial: 'events/event', locals: { event: event } %>
+  <% end %>
+</div>
