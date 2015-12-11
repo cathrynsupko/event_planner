@@ -30,6 +30,7 @@
 </div>
 
 <div class="main">
+<% if @event.date >= Time.now %>
 <% if @responded %>
   <% rsvp = @going ? "Yes" : "No" %>
   <% other = @going ? "No" : "Yes" %>
@@ -50,25 +51,32 @@
  Are you going?
   <button>
     <%= link_to "Yes", { controller: "attendings", action: "create", event: @event.id, rsvp: true }, 
-      method: :post, remote: true %>
+      method: :post%>
   </button>
     
   <button>
     <%= link_to "No", 
       { controller: "attendings", action: "create", event: @event.id, rsvp: false },
-        method: :post, remote: true %>
+        method: :post%>
   </button>
 <% end %>      
+  
+<% end %>
         
         
-        
-        
-  <h3>Attendees (<span id="attend-<%=@event.id %>"><%= @attendees.count%></span>)</h3>
+  <h3>Attending (<span id="attend-<%=@event.id %>"><%= @attendees.count%></span>)</h3>
+  
   <% @attendees.each do |user| %>
-    <p><%=  user.name %> </p>
+    <div class="user-display">
+      <%= link_to user.name, user_path(user) %>
+    </div>
   <% end %>
   
-  
+  <h3> Invited </h3>
+  <%= link_to "invite others", new_invitation_path( id: @event.id )%><br>
+  <% @invitees.each do |invitee| %>
+    <%= link_to invitee.name, user_path(invitee) %>
+  <% end %>
 </div>
 
 

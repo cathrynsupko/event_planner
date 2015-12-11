@@ -2,7 +2,8 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy]
   
   def index
-    @events = Event.all
+    @upcoming = Event.where("date >= ?", Time.now).order("date")
+    @past = Event.where("date < ?", Time.now).order("date")
   end
   
   def new
@@ -24,6 +25,7 @@ class EventsController < ApplicationController
     @responded = user_responded?(@event)
     @going = user_going?(@event)
     @attendees = event_attendees(@event)
+    @invitees = invitees(@event)
   end
   
   def edit

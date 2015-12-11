@@ -1,6 +1,6 @@
 <div class="large-container">
   <h1> Upcoming Events</h1>
-  <% @events.each do |event| %>
+  <% @upcoming.each do |event| %>
     <div class="event">
     
       <div class="date">
@@ -11,7 +11,7 @@
       </div>
       
      <div class="details">
-        <%= link_to event.title, event_path(event), class:"emph" %><br>
+        <%= link_to event.title, event_path(event)  %><br>
         <span class="small light">
           hosted by <%= link_to event.user.name, user_path(event.user) %> <br>
         </span>
@@ -19,5 +19,26 @@
     
     </div>
   <% end %>
-  
+</div>
+<div class="large-container">
+  <h1>Past Events</h1>
+  <% @past.each do |event| %>
+    <div class="event">
+    
+      <div class="date">
+        <div class="day">
+          <%= event.date.day %>
+        </div>
+        <%= event.date.strftime("%B").upcase %>
+      </div>
+      
+     <div class="details">
+        <%= link_to event.title, event_path(event) %><br>
+        <span class="small light">
+          hosted by <%= link_to event.user.name, user_path(event.user) %> <br>
+        </span>
+      </div> 
+    
+    </div>
+  <% end %>
 </div>

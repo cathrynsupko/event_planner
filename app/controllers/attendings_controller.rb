@@ -8,6 +8,7 @@ class AttendingsController < ApplicationController
       @attending = current_user.attendings.build
       @attending.attended_event_id = params[:event]
       @attending.going = params[:rsvp]
+      @attending.save
     end
     redirect_to @event
   end
@@ -22,8 +23,6 @@ class AttendingsController < ApplicationController
     redirect_to @event
   end
   
-  
- 
   
     
 end

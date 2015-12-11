@@ -1,0 +1,6 @@
+<h1> Invitations to <%= @event_id%></h1>
+<ul>
+  <% @stuff.each do |user| %>
+    <li> <%= user.name %></li>
+  <% end %>
+</ul>
