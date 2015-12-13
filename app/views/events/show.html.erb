@@ -29,7 +29,7 @@
   </p>
 </div>
 
-<div class="main">
+<div class="main comments">
 <% if @event.date >= Time.now %>
 <% if @responded %>
   <% rsvp = @going ? "Yes" : "No" %>
@@ -65,13 +65,19 @@
         
   <div class="display">    
     <h3>Attending (<span id="attend-<%=@event.id %>"><%= @attendees.count%></span>)</h3>
-    
+    <div class="users">
     <% @attendees.each do |user| %>
-      <div class="user-display">
-        <%= link_to user.name, user_path(user) %>
-      </div>
+       <div class="user-display">
+         <%= link_to user.name, user_path(user) %>
+       </div>
     <% end %>
+   
+      
+    </div>
+    <br class="clear">
   </div>
+  
+  
   <div class="display">
     <h3> Invited (<span id="attend-<%=@event.id %>"><%= @invitees.count%></span>) </h3>
     <%= link_to "invite others", new_event_invitation_path(@event)%><br>
@@ -80,7 +86,9 @@
         <%= link_to invitee.name, user_path(invitee) %>
       </div>
     <% end %>
+   
   </div>
+  <br class="clear">
 </div>
 
 

@@ -2,8 +2,8 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy]
   
   def index
-    @upcoming = Event.where("date >= ?", Time.now).order("date")
-    @past = Event.where("date < ?", Time.now).order("date")
+    @upcoming = Event.where("date >= ?", Time.now).order("date").paginate(:page => params[:page],:per_page => 16)
+    @past = Event.where("date < ?", Time.now).order("date").limit(4) 
   end
   
   def new

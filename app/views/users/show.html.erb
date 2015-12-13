@@ -14,7 +14,7 @@
 <div class="large-container">
   <h2>Events hosted by <%= @user.name %></h2>
   
-  <% @user.events.each do |event| %>
+  <% @user.events.order('date').each do |event| %>
     <%= render partial: 'events/event', locals: { event: event } %>
   <% end %>
 
@@ -23,7 +23,7 @@
 
 <div class="large-container">
   <h2>Upcoming events <%= @user.name %> is attending</h2>
-  <% @user.attended_events.each do |event| %>
+  <% @user.attended_events.order('date').each do |event| %>
     <%= render partial: 'events/event', locals: { event: event } %>
   <% end %>
 </div>

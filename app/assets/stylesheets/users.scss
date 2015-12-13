@@ -3,10 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .user-display{
-  width: 45%;
+  width: 50%;
   padding-top:10px;
   height: 40px;
   font-size: 18px;
-  display:inline;
+  display:inline-block;
   float:left;
+  margin-bottom:10px;
+  
 }
+

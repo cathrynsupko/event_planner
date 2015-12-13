@@ -32,7 +32,7 @@ class EventsController < ApplicationController
     @responded = user_responded?(@event)
     @going = user_going?(@event)
     @attendees = event_attendees(@event)
-    @invitees = invitees(@event)
+    @invitees = not_responded(@event)
   end
   
   def edit
@@ -73,20 +73,5 @@ class EventsController < ApplicationController
       attendees = User.where(id: ids)
     end
     
-    def user_invited?(event)
-      return false unless current_user
-      invitees(event).include?(current_user)
-    end
     
-    def user_attending?(event)
-      return false unless current_user
-      event.attendees.include?(current_user)
-    end
-    
-    def permitted_user(event)
-      unless user_invited?(event) || user_attending?(event)
-        flash[:notice] = "Sorry! The event you are trying to access is private."
-        redirect_to events_path
-      end
-    end
 end

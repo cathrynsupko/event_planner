@@ -26,6 +26,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#use to paginate events
+gem 'will_paginate', '~>3.0.6'
+
+
+#use faker gem to seed db
+gem 'faker'
+
 #use devise gem for authentication
 gem 'devise'
 

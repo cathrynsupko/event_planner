@@ -11,6 +11,7 @@
     <%= link_to event.title, event_path(event) %><br>
     <span class="small light">
       hosted by <%= link_to event.user.name, user_path(event.user) %> <br>
+      <%= event.attendees.count %> attendees
     </span>
   </div> 
     

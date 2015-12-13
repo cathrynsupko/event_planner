@@ -3,10 +3,14 @@
   <% @upcoming.each do |event| %>
     <%= render partial: 'event', locals: { event: event } %>
   <% end %>
+  <br class="clear">
+  <%= will_paginate @upcoming %>
 </div>
 <div class="large-container">
   <h1>Past Events</h1>
   <% @past.each do |event| %>
     <%= render partial: 'event', locals: { event: event } %>
   <% end %>
+  <br class="clear">
+  
 </div>

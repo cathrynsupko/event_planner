@@ -242,10 +242,34 @@ i{
 }
 
 .display{
-  clear: left;
+  max-width:550px;
+  
+ 
   margin-top: 10px;
   h3{
     margin:0;
   }
+  
+  li{
+    display:inline;
+    margin-right: 50px;
+    font-size:18px;
+    
+  }
+  
+  line-height:3;
+}
+
+.user-display{
+  width: 45%;
+  padding-top:10px;
+  height: 40px;
+  font-size: 18px;
+  margin-bottom:10px;
+  
+}
+
+.clear{
+  clear:both;
 }
 
